@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Two Hearts, One Love: Leo & Bow</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <style>
+/* ========== Root & Base Styles ========== */
+:root {
+  --coral-pink: #e9967a;
+  --coral-blue: #6495ed;
+  --primary-color: var(--coral-blue);
+  --secondary-color: var(--coral-pink);
+  --light-color: #f8f4f0;
+  --text-color: #333;
+  --text-light: #777;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Montserrat", sans-serif;
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  --min-font-size: 14px;
+  --max-font-size: 18px;
+  --min-screen-width: 320px;
+  --max-screen-width: 1920px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: clamp(
+    var(--min-font-size),
+    calc(var(--min-font-size) + (var(--max-font-size) - var(--min-font-size)) * ((100vw - var(--min-screen-width)) / (var(--max-screen-width) - var(--min-screen-width))),
+    var(--max-font-size)
+  ));
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background: var(--light-color);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ========== Navigation ========== */
+.navbar {
+  position: fixed;
+  width: 100%;
+  padding: 15px 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.navbar.scrolled {
+  padding: 10px 0;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-color);
+  text-decoration: none;
+  user-select: none;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 300px;
+  height: 100vh;
+  background: white;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+  transition: var(--transition);
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.nav-links.open {
+  right: 0;
+}
+
+.nav-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  font-size: 1.1rem;
+  padding: 10px 0;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: var(--transition);
+  user-select: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(100, 149, 237, 0.4);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(233, 150, 122, 0.5);
+}
+
+.hamburger {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 5px;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-color);
+  margin: 4px 0;
+  transition: var(--transition);
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ========== Hero Section ========== */
+.hero {
+  height: 100vh;
+  min-height: 550px;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("DSC01582.JPEG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  padding: 0 15px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.3) 100%);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content h1 {
+  font-family: var(--font-heading);
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  padding: 0 10px;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  user-select: none;
+  flex-wrap: wrap;
+}
+
+.countdown div {
+  text-align: center;
+  background: rgba(255, 255, 255, 0);
+  padding: 15px 10px;
+  border-radius: 8px;
+  min-width: 70px;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: var(--transition);
+}
+
+.countdown div:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0);
+}
+
+.countdown span {
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  font-weight: bold;
+  display: block;
+  line-height: 1;
+  margin-bottom: 5px;
+  font-family: var(--font-heading);
+}
+
+.countdown small {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 2rem;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.scroll-down:hover {
+  color: var(--secondary-color);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-15px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-8px) translateX(-50%);
+  }
+}
+
+/* ========== Sections ========== */
+.section {
+  scroll-margin-top: 70px;
+  padding: 60px 0;
+  position: relative;
+}
+
+.section:nth-child(even) {
+  background-color: rgba(248, 244, 240, 0.7);
+}
+
+.section h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  text-align: center;
+  margin: 0 0 50px 0;
+  position: relative;
+  color: var(--text-color);
+  font-weight: 600;
+  padding: 0 10px;
+}
+
+.section h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Floating hearts decoration */
+.floating-hearts {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  opacity: 0;
+  color: var(--primary-color);
+  animation: float 15s linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ========== Our Story Section ========== */
+#our-story {
+  background: linear-gradient(
+      rgba(248, 244, 240, 0.85),
+      rgba(248, 244, 240, 0.85)
+    ),
+    url("DSC01670.JPEG") center/cover no-repeat scroll;
+  background-size: auto 100%;
+  background-position: center center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.story-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.story-card {
+  flex: 1 1 100%;
+  max-width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  transition: var(--transition);
+  z-index: 0;
+}
+
+.story-card:hover::before {
+  width: 100%;
+}
+
+.story-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.story-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.story-card:hover h3 {
+  color: white;
+}
+
+.story-text {
+  font-style: italic;
+  line-height: 1.5;
+  transition: var(--transition);
+  font-size: 0.95rem;
+}
+
+.story-card:hover .story-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ========== Wedding Details Section ========== */
+#details {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.85)
+    ),
+    url("DSC01670.JPEG") center/cover no-repeat scroll;
+  background-size: auto 100%;
+  background-position: center center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+#details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(248, 244, 240, 0.7);
+  z-index: -1;
+}
+
+.details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  text-align: left;
+}
+
+.detail-card {
+  background: white;
+  color: var(--text-color);
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.detail-card.full-width {
+  grid-column: auto;
+  padding: 30px 20px;
+}
+
+.detail-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  z-index: 1;
+}
+
+.detail-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.detail-card i {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.detail-card:hover i {
+  transform: scale(1.1);
+}
+
+.detail-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin: 0;
+  position: relative;
+  padding-bottom: 8px;
+  flex-grow: 1;
+}
+
+.detail-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.detail-card p {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--text-light);
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  padding: 8px 18px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.map-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.detail-card.full-width .detail-header {
+  margin-bottom: 20px;
+}
+
+/* ========== WEDDING PROGRAMME SECTION (Updated) ========== */
+#timeline {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.85)
+    ),
+    url("DSC01670.JPEG") center/cover no-repeat scroll;
+  background-size: auto 100%;
+  background-position: center center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+}
+
+#timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(248, 244, 240, 0.7);
+  z-index: -1;
+}
+
+.timeline-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  text-align: left;
+}
+
+.timeline-card {
+  background: white;
+  color: var(--text-color);
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  z-index: 1;
+}
+
+.timeline-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.timeline-card i {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.timeline-card:hover i {
+  transform: scale(1.1);
+}
+
+.timeline-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin: 0;
+  position: relative;
+  padding-bottom: 8px;
+  flex-grow: 1;
+}
+
+.timeline-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.timeline-list {
+  padding: 0;
+  margin: 0;
+}
+
+.timeline-simple-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: rgba(248, 244, 240, 0.5);
+  border-radius: 8px;
+  border-left: 3px solid var(--secondary-color);
+}
+
+.timeline-simple-item .time {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.timeline-simple-item .event {
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* ========== ENTOURAGE SECTION (Visible Borders) ========== */
+#entourage {
+  background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), 
+              url("DSC01670.JPEG") center/cover no-repeat;
+  padding: 60px 0;
+  overflow-x: hidden;
+}
+
+.entourage-container {
+  width: 100%;
+}
+
+.entourage-group-fullwidth {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 40px 0;
+  margin-bottom: 30px;
+  background: transparent; /* Remove white background */
+}
+
+.entourage-group-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Icons styling */
+.entourage-header i {
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  width: 50px; /* Fixed width for alignment */
+  text-align: center;
+}
+
+/* Specific icon colors if desired */
+.fa-users { /* Parents icon */
+  color: var(--secondary-color);
+}
+
+.fa-handshake { /* Sponsors icon */
+  color: #9370DB; /* Purple accent */
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .entourage-header i {
+    font-size: 1.8rem;
+    width: 40px;
+  }
+}
+
+/* Header Styles */
+.entourage-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--primary-color); /* Add border to header */
+}
+
+.entourage-header i {
+  font-size: 2.2rem;
+  color: var(--primary-color); /* Solid color instead of gradient */
+}
+
+.entourage-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--text-color);
+}
+
+/* Members Grid */
+.entourage-members {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Visible border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.entourage-member {
+  padding: 15px;
+  background: rgba(248, 244, 240, 0.8);
+  border-radius: 8px;
+  border-left: 4px solid var(--secondary-color);
+  transition: var(--transition);
+}
+
+.entourage-member:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.member-role {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.member-name {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  .entourage-group-content {
+    padding: 0 20px;
+  }
+  
+  .entourage-members {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .entourage-members {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .entourage-members.paired {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  .entourage-members.sponsors {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+/* ========== RSVP Section ========== */
+#rsvp {
+  background: linear-gradient(
+      rgba(100, 149, 237, 0.2),
+      rgba(233, 150, 122, 0.2)
+    ),
+    url("DSC01670.JPEG") center/cover no-repeat scroll;
+  background-size: auto 100%;
+  background-position: center center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 1;
+}
+
+#rsvp::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(248, 244, 240, 0.7);
+  z-index: -1;
+}
+
+.rsvp-text {
+  font-size: 1.05rem;
+  margin-bottom: 15px;
+  color: black;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.rsvp-note {
+  font-size: 0.9rem;
+  margin-bottom: 25px;
+  color: black;
+  font-style: italic;
+}
+
+.rsvp-button-wrapper {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.rsvp-button-wrapper .btn {
+  padding: 14px 35px;
+  font-size: 1.1rem;
+}
+
+.rsvp-content {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ========== Footer ========== */
+footer {
+  background: linear-gradient(rgba(100,149,237,0.9), rgba(233,150,122,0.9)), url("DSC01670.JPEG") center/cover no-repeat scroll;
+  background-size: auto 100%;
+  background-position: center top;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 30px 0;
+  text-align: center;
+  font-weight: 500;
+  user-select: none;
+  position: relative;
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.footer-text {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* ========== Tablet and Desktop Styles ========== */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 20px 0;
+  }
+
+  .navbar.scrolled {
+    padding: 15px 0;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .nav-links {
+    position: static;
+    width: auto;
+    max-width: none;
+    height: auto;
+    background: none;
+    flex-direction: row;
+    gap: 35px;
+    box-shadow: none;
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 1.05rem;
+    padding: 0;
+  }
+
+  .nav-links a::after {
+    bottom: -5px;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .hero {
+    min-height: 600px;
+    padding: 0 20px;
+  }
+
+  .hero-content h1 {
+    margin-bottom: 25px;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    padding: 0 15px;
+  }
+
+  .countdown {
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .countdown div {
+    padding: 25px 30px;
+    min-width: 100px;
+  }
+
+  .countdown span {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+  }
+
+  .countdown small {
+    font-size: 1.1rem;
+  }
+
+  .scroll-down {
+    bottom: 40px;
+    font-size: 2.2rem;
+  }
+
+  .section {
+    scroll-margin-top: 90px;
+    padding: 100px 0;
+  }
+
+  .section h2 {
+    font-size: 2.8rem;
+    margin: 0 0 70px 0;
+    padding: 0;
+  }
+
+  .section h2::after {
+    width: 100px;
+    height: 4px;
+    margin: 20px auto 0;
+  }
+
+  #our-story, #details, #timeline, #entourage, #rsvp {
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .story-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .story-card {
+    flex: 1 1 300px;
+    max-width: 350px;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .story-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .story-text {
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .detail-card {
+    border-radius: 15px;
+    padding: 35px 25px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .detail-card.full-width {
+    grid-column: 1 / -1;
+    padding: 40px 30px;
+  }
+
+  .detail-card::before {
+    height: 5px;
+  }
+
+  .detail-card i {
+    font-size: 2rem;
+  }
+
+  .detail-card h3 {
+    font-size: 1.6rem;
+    padding-bottom: 10px;
+  }
+
+  .detail-card p {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .map-link {
+    margin-top: 15px;
+    font-size: 1.05rem;
+    padding: 8px 20px;
+  }
+
+  .detail-card.full-width .detail-header {
+    margin-bottom: 25px;
+  }
+
+  /* Timeline tablet/desktop styles */
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .timeline-card {
+    border-radius: 15px;
+    padding: 35px 25px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .timeline-card::before {
+    height: 5px;
+  }
+
+  .timeline-card i {
+    font-size: 2rem;
+  }
+
+  .timeline-card h3 {
+    font-size: 1.6rem;
+    padding-bottom: 10px;
+  }
+
+  .timeline-header {
+    margin-bottom: 25px;
+  }
+
+  .timeline-simple-item {
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+  }
+
+  .timeline-simple-item .time {
+    min-width: 120px;
+    margin-bottom: 0;
+    margin-right: 15px;
+    font-size: 1.1rem;
+  }
+
+  .timeline-simple-item .event {
+    font-size: 1rem;
+  }
+
+  /* Entourage tablet/desktop styles */
+  .entourage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .entourage-group {
+    border-radius: 15px;
+    padding: 35px 25px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .entourage-group::before {
+    height: 5px;
+  }
+
+  .entourage-group i {
+    font-size: 2rem;
+  }
+
+  .entourage-header h3 {
+    font-size: 1.6rem;
+    padding-bottom: 10px;
+  }
+
+  .entourage-header {
+    margin-bottom: 25px;
+  }
+
+  .entourage-members {
+    gap: 18px;
+  }
+
+  .entourage-member {
+    padding: 18px;
+  }
+
+  .member-role {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .member-name {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  /* Special grid layouts for certain groups */
+  .entourage-members.sponsors,
+  .entourage-members.paired {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .rsvp-text {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+
+  .rsvp-note {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  .rsvp-button-wrapper {
+    margin-top: 20px;
+  }
+
+  .rsvp-button-wrapper .btn {
+    padding: 16px 45px;
+    font-size: 1.2rem;
+  }
+
+  footer {
+    background-attachment: fixed;
+    background-position: center center;
+    padding: 40px 0;
+    background-size: cover;
+  }
+
+  .footer-logo {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
+
+  .footer-text {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+}
+
+@media (max-height: 700px) and (max-width: 767px) {
+  #our-story,
+  #details,
+  #timeline,
+  #entourage,
+  #rsvp {
+    background-size: auto 120%;
+    background-position: center 10%;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">Leo 💍 Bow</a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#our-story">Our Story</a>
+        <a href="#details">Details</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#entourage">Entourage</a>
+        <a href="#rsvp" class="btn">RSVP</a>
+      </div>
+      <button class="hamburger" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="hero-content">
+      <h1>Two Hearts, One Love:<br>Leo &amp; Bow</h1>
+      <div class="countdown" aria-label="Countdown to wedding date">
+        <div>
+          <span id="days">35</span>
+          <small>Days</small>
+        </div>
+        <div>
+          <span id="hours">05</span>
+          <small>Hours</small>
+        </div>
+        <div>
+          <span id="minutes">44</span>
+          <small>Minutes</small>
+        </div>
+        <div>
+          <span id="seconds">15</span>
+          <small>Seconds</small>
+        </div>
+      </div>
+    </div>
+    <a href="#our-story" class="scroll-down" aria-label="Scroll down to Our Story section">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- Our Story Section -->
+  <section id="our-story" class="section" aria-label="Our Story Timeline">
+    <div class="floating-hearts" id="floatingHearts2"></div>
+    <div class="container">
+      <h2>A Glimpse of A Simple Story That Led to Forever</h2>
+
+      <div class="story-cards">
+        <div class="story-card" tabindex="0">
+          <h3>Our First Meeting</h3>
+          <div class="story-text">
+            <p>
+              Our first meeting was simple.<br />
+              I asked for a chair at the restaurant, my back hurt, and I needed to sit.<br />
+              Just a small moment,<br />
+              But that's how it all began.<br />
+              A quiet beginning to a story I never saw coming.<br />
+              <strong>- Bow</strong><br /><br />
+              It all started with a simple, ordinary dinner on a pretty normal night. A conversation that felt iconic in its own way. She asked for a chair to sit, and without even realizing it, I gave her my life<br />
+              <strong>- Leo</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="story-card" tabindex="0">
+          <h3>First Official Day</h3>
+          <div class="story-text">
+            <p>
+              I looked at him and asked,<br />
+              "What are we right now?"<br />
+              Then he asked me to be his girlfriend!!!<br />
+              <strong>- Bow</strong><br /><br />
+              Since the day we first met, you could count on one hand the days we didn't see each other. Time flew by, and little by little, a mutual understanding quietly started to grow. Then Nov 5, 2022, she said yes for the first time — a simple word that changed everything.<br />
+              <strong>- Leo</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="story-card" tabindex="0">
+          <h3>The Proposal Day</h3>
+          <div class="story-text">
+            <p>
+              I thought we were just going on a trip for my birthday.<br />
+              But along the way, he was acting so strangely.<br />
+              That's when I knew. Something special was about to happen.<br />
+              <strong>- Bow</strong><br /><br />
+              "It was probably the most nervous and excited I've ever felt. I planned everything by the beach, hoping everything would be perfect. And when the fireworks burst into the sky, with a YES. A moment I'll never forget, made even more special because the very next day was her birthday."<br />
+              <strong>- Leo</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Wedding Details Section -->
+<section id="details" class="section" aria-label="Wedding Details">
+  <div class="floating-hearts" id="floatingHearts3"></div>
+  <div class="container">
+    <h2>Wedding Details</h2>
+    <div class="details-grid">
+      <div class="detail-card detail-date">
+        <div class="detail-header">
+          <i class="fas fa-calendar-alt"></i>
+          <h3>When</h3>
+        </div>
+        <p>August 10, 2025, Sunday</p><br>
+        <ul>
+          <li><p>8.00am Thai Ceremony (Nonmandatory)</p></li>
+          <li><p>4.30pm Christian Ceremony</p>  </li>
+        </ul>
+      </div>
+
+      <div class="detail-card detail-location">
+        <div class="detail-header">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>Where</h3>
+        </div>
+        <p>Arundara (อรุณดารา)<br>
+          <br>
+          333 ถนนปัญญาอินทรา Khwaeng Sam Wa Tawan Tok, Khet Khlong Sam Wa, Bangkok 10510</p>
+        <a href="https://maps.app.goo.gl/X2KHYcekBBHomsvE6?g_st=ic" target="_blank" rel="noopener noreferrer" class="map-link">View on Map</a>
+      </div>
+
+      <div class="detail-card detail-dresscode">
+        <div class="detail-header">
+          <i class="fas fa-tshirt"></i>
+          <h3>Theme & Dress Code</h3>
+        </div>
+        <p>We're celebrating a Garden Wedding with colors of Dusty Coral Pink and Coral Blue.</p><br>
+        <p><strong>Dress Code:</strong></p>
+        <p>• Entourage — Formal Attire</p>
+        <p>• Guests — Smart Formal</p>
+      </div>
+
+      <div class="detail-card detail-reception full-width">
+        <div class="detail-header">
+          <i class="fas fa-glass-cheers"></i>
+          <h3>Reception to Follow</h3>
+        </div>
+        <p>A dinner reception will be held after the Christian ceremony. Join us for food, drinks, and unforgettable memories under the stars.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wedding Programme Section (Updated) -->
+<section id="timeline" class="section" aria-label="Wedding Day Timeline">
+  <div class="floating-hearts" id="floatingHearts4"></div>
+  <div class="container">
+    <h2>Wedding Programme</h2>
+    <div class="timeline-grid">
+      
+      <!-- Thai Wedding Ceremony -->
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <i class="fas fa-calendar-check"></i>
+          <h3>Thai Wedding Ceremony</h3>
+        </div>
+        <div class="timeline-list">
+          <div class="timeline-simple-item">
+            <span class="time">7:30 AM</span>
+            <span class="event">Guests Arrival & Welcome Time</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">8:00 AM</span>
+            <span class="event">Takbat Ceremony</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">8:30 AM</span>
+            <span class="event">Sinsod Ceremony</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">9:30 AM</span>
+            <span class="event">End of Thai Ceremony</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filipino Wedding Ceremony -->
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <i class="fas fa-church"></i>
+          <h3>Filipino Wedding Ceremony</h3>
+        </div>
+        <div class="timeline-list">
+          <div class="timeline-simple-item">
+            <span class="time">4:00 PM</span>
+            <span class="event">Guests Arrival & Registration</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">4:30 PM</span>
+            <span class="event">Processional</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">4:45 PM</span>
+            <span class="event">Wedding Ceremony</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">5:20 PM</span>
+            <span class="event">Recessional</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reception -->
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <i class="fas fa-glass-cheers"></i>
+          <h3>Reception</h3>
+        </div>
+        <div class="timeline-list">
+          <div class="timeline-simple-item">
+            <span class="time">5:30 PM</span>
+            <span class="event">Light Refreshments</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">5:35 PM</span>
+            <span class="event">Grand Entrance of the Couple</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">5:40 PM</span>
+            <span class="event">Video Presentation</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">5:50 PM</span>
+            <span class="event">Wedding Toasts & Speeches</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">6:20 PM</span>
+            <span class="event">Special Performances</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">6:50 PM</span>
+            <span class="event">Bouquet Toss</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">7:00 PM</span>
+            <span class="event">Reception Dinner & Photo Session</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">8:30 PM</span>
+            <span class="event">Closing Remarks</span>
+          </div>
+          <div class="timeline-simple-item">
+            <span class="time">8:30 PM Onwards</span>
+            <span class="event">Karaoke</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Entourage Section (Updated) -->
+<section id="entourage" class="section" aria-label="Wedding Entourage">
+  <div class="floating-hearts" id="floatingHearts5"></div>
+  <div class="container">
+    <h2>Our Entourage</h2>
+    
+    <div class="entourage-container">
+      <!-- Wedding Party -->
+      <div class="entourage-group-fullwidth">
+        <div class="entourage-group-content">
+          <div class="entourage-header">
+            <i class="fas fa-heart"></i>
+            <h3>Wedding Party</h3>
+          </div>
+          <div class="entourage-members">
+            <div class="entourage-member">
+              <div class="member-role">Maid of Honor</div>
+              <div class="member-name">Sunisa Petchyoy</div>
+            </div>
+            <div class="entourage-member">
+              <div class="member-role">Best Man</div>
+              <div class="member-name">Lex Galgame</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ceremony Participants -->
+      <div class="entourage-group-fullwidth">
+        <div class="entourage-group-content">
+        <div class="entourage-header">
+          <i class="fas fa-ring"></i>
+          <h3>Ceremony</h3>
+        </div>
+        <div class="entourage-members">
+          <div class="entourage-member">
+            <div class="member-role">Officiant</div>
+            <div class="member-name">Pastor Ruel Sembrano</div>
+            <div class="member-name">Mrs. Lorena Sembrano</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-role">Candle Bearers</div>
+            <div class="member-name">Suwanna Phuangdokmai</div>
+            <div class="member-name">Sasithorn Bensamson</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-role">Bible Bearer</div>
+            <div class="member-name">Monet Panita</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-role">Ring Bearers</div>
+            <div class="member-name">Matt Pianprasertkul</div>
+            <div class="member-name">Tito Chonlathee Pekanan</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-role">Flower Girl</div>
+            <div class="member-name">Princess Andrea Daylo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parents -->
+      <div class="entourage-group-fullwidth">
+        <div class="entourage-group-content">
+        <div class="entourage-header">
+          <i class="fas fa-users"></i>
+          <h3>Parents</h3>
+        </div>
+        <div class="entourage-members">
+          <div class="entourage-member">
+            <div class="member-role">Groom's Side</div>
+            <div class="member-name">Rosalie Daylo</div>
+            <div class="member-name">Leonard Daylo (Brother)</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-role">Bride's Side</div>
+            <div class="member-name">Rabiab Phantharat (Mother)</div>
+            <div class="member-name">Jaroen Sri-in (Father)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Principal Sponsors -->
+      <div class="entourage-group-fullwidth">
+        <div class="entourage-group-content">
+        <div class="entourage-header">
+          <i class="fas fa-handshake"></i>
+          <h3>Principal Sponsors</h3>
+        </div>
+        <div class="entourage-members sponsors">
+          <div class="entourage-member">
+            <div class="member-name">Ian Manalo & Angel Manalo</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">Damon Sefton & Marie Sefton</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">Grace Bautista Grafil</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">Chansuda Charusathien</div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Groomsmen & Bridesmaids -->
+      <div class="entourage-group-fullwidth">
+        <div class="entourage-group-content">
+        <div class="entourage-header">
+          <i class="fas fa-people-arrows"></i>
+          <h3>Groomsmen & Bridesmaids</h3>
+        </div>
+        <div class="entourage-members paired">
+          <div class="entourage-member">
+            <div class="member-name">Patrus Cusi & Phatchanun Nuanwat</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">Jonathan Baladad & Woranan Thiraamonchinda</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">Arnie Patosa & Patcharaporn Sirithiantong</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">John Aren Patosa & Winujarin Kampol</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">Anant Noorul Ameen & Kyla Francesca Clarino</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">Monchit Khamboonmee & Precious Bea Padilla</div>
+          </div>
+          <div class="entourage-member">
+            <div class="member-name">Dave Balbuena & Duangkamol Chulamanee</div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP Section -->
+<section id="rsvp" class="section">
+  <div class="container">
+    <h2>RSVP</h2>
+    <div class="rsvp-content">
+      <p class="rsvp-text">
+        Your presence is the greatest gift we could ask for. Please kindly let us know if you will be able to join us by filling out the form below.
+      </p>
+      <p class="rsvp-note">
+        <strong>P.S.</strong> We're wrapping up the guest list by August 1, so please reply before then. Thanks!
+      </p>
+      <div class="rsvp-button-wrapper">
+        <a href="https://docs.google.com/forms/d/1UswwsSzLNZamDWn8VhwfYJzA5mS1LOdwch9PtG9xe6s/edit" target="_blank" class="btn">
+          Fill Out RSVP Form <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">Leo &amp; Bow</div>
+        <div class="footer-text">
+          Thank you for being part of our journey. We look forward to celebrating our love with you!
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+// Navbar scroll effect
+const navbar = document.querySelector('.navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Mobile menu toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  hamburger.classList.toggle('open');
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('open');
+  });
+});
+
+// Enhanced smooth scrolling for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetElement = document.querySelector(targetId);
+    if (!targetElement) return;
+    
+    // Calculate the position to scroll to
+    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+    
+    // Smooth scroll
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+    
+    // Update URL without jumping
+    history.pushState(null, null, targetId);
+  });
+});
+
+// Create floating hearts
+function createHearts(containerId, count = 15) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  
+  for (let i = 0; i < count; i++) {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '<i class="fas fa-heart"></i>';
+    
+    // Random positioning
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.top = Math.random() * 100 + '%';
+    
+    // Random size
+    const size = Math.random() * 20 + 10;
+    heart.style.fontSize = size + 'px';
+    
+    // Random animation duration and delay
+    heart.style.animationDuration = Math.random() * 20 + 10 + 's';
+    heart.style.animationDelay = Math.random() * 5 + 's';
+    
+    container.appendChild(heart);
+  }
+}
+
+// Initialize floating hearts
+createHearts('floatingHearts', 20);
+createHearts('floatingHearts2', 15);
+createHearts('floatingHearts3', 15);
+createHearts('floatingHearts4', 15);
+createHearts('floatingHearts5', 15);
+
+// Countdown timer to wedding date
+const countdown = () => {
+  const countDate = new Date("August 10, 2025 16:30:00").getTime();
+  const now = new Date().getTime();
+  const gap = countDate - now;
+
+  // Time calculations
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  const days = Math.floor(gap / day);
+  const hours = Math.floor((gap % day) / hour);
+  const minutes = Math.floor((gap % hour) / minute);
+  const seconds = Math.floor((gap % minute) / second);
+
+  // Update the UI
+  document.getElementById("days").innerText = days.toString().padStart(2, "0");
+  document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
+  document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
+  document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
+};
+
+// Run countdown every 1 second
+setInterval(countdown, 1000);
+countdown(); // Initial call
+
+// Add animation to elements when they come into view
+const animateOnScroll = () => {
+  const elements = document.querySelectorAll('.detail-card, .story-card, .timeline-card, .entourage-group');
+  
+  elements.forEach(element => {
+    const elementPosition = element.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.2;
+    
+    if (elementPosition < screenPosition) {
+      element.style.opacity = '1';
+      element.style.transform = 'translateY(0)';
+    }
+  });
+};
+
+// Set initial state for animation
+document.querySelectorAll('.detail-card, .story-card, .timeline-card, .entourage-group').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+});
+
+// Run animation check on scroll and load
+window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('load', animateOnScroll);
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  const isClickInsideNav = navLinks.contains(e.target) || hamburger.contains(e.target);
+  if (!isClickInsideNav && navLinks.classList.contains('open')) {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('open');
+  }
+});
+
+// Add active class to current section in navigation
+const sections = document.querySelectorAll('section');
+const navItems = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+    
+    if (pageYOffset >= (sectionTop - navbarHeight - 50)) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('href') === `#${current}`) {
+      item.classList.add('active');
+    }
+  });
+});
+
+// Add active class to navigation items on click
+navItems.forEach(item => {
+  item.addEventListener('click', function() {
+    navItems.forEach(i => i.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Preload images for better performance
+function preloadImages() {
+  const images = [
+    "DSC01582.JPEG",
+    "DSC01670.JPEG"
+  ];
+  
+  images.forEach(image => {
+    const img = new Image();
+    img.src = image;
+  });
+}
+
+// Call preload function when DOM is loaded
+document.addEventListener('DOMContentLoaded', preloadImages);
+
+// Add hover effect to countdown items
+const countdownItems = document.querySelectorAll('.countdown div');
+countdownItems.forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    item.style.transform = 'translateY(-5px) scale(1.05)';
+    item.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
+  });
+  
+  item.addEventListener('mouseleave', () => {
+    item.style.transform = 'translateY(0) scale(1)';
+    item.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+  });
+});
+
+// Add click effect to buttons
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(button => {
+  button.addEventListener('mousedown', () => {
+    button.style.transform = 'translateY(1px)';
+    button.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+  });
+  
+  button.addEventListener('mouseup', () => {
+    button.style.transform = 'translateY(-3px)';
+    button.style.boxShadow = '0 6px 20px rgba(233, 150, 122, 0.5)';
+  });
+  
+  button.addEventListener('mouseleave', () => {
+    button.style.transform = 'translateY(0)';
+    button.style.boxShadow = '0 4px 15px rgba(100, 149, 237, 0.4)';
+  });
+});
+</script>
+</body>
+</html>
